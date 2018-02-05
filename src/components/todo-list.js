@@ -4,10 +4,6 @@ import _ from 'lodash';
 import database from '../firebase';
 
 
-
-
-
-
 export default class TodoList extends React.Component {
 
     state = {
@@ -16,17 +12,12 @@ export default class TodoList extends React.Component {
 
     componentDidMount() {
 
-
         // fetch posts from Firebase
         database.ref('todos').orderByChild('timestamp').on('value', snapshot => {
             this.newTodos = [];
             snapshot.forEach(todo => {
-
                 this.newTodos.push({ id: todo.key, ...todo.val() });
-
             })
-
-
             this.setState({ todos: this.newTodos });
         });
     }
@@ -35,31 +26,68 @@ export default class TodoList extends React.Component {
     filterTodos = () => {
 
         const { todos } = this.state;
-
-        console.log(todos);
-
         return todos.sort((a, b) => b.timestamp - a.timestamp)
     }
 
     handleCheck = (id, checked) => {
+        database.ref('todos').child(id).update({ checked: !checked });
+    }
 
+    handleDelete = (id) => {
+        database.ref('todos').child(id).remove();
+    }
 
-        // TODO: figure out how to change data in firebase 
-        database.ref('todos').child(id).once('value', snapshot => {
-            snapshot.ref.update({ 'checked': !checked });
+    handleEdit = (id) => {
+        const { todos } = this.state;
+        const newTodos = todos.map(todo => {
+            if (todo.id === id) {
+                return {
+                    ...todo,
+                    edit: true
+                }
+            }
+            return todo
         })
+
+        this.setState({ todos: newTodos });
+    }
+
+    handleEditSubmit = (title, id) => {
+        console.log('on blur?');
+        const { todos } = this.state;
+        const newTodos = todos.map(todo => {
+            if (todo.id === id) {
+                return {
+                    ...todo,
+                    edit: false,
+                    title
+                }
+            }
+            return todo
+        })
+
+        this.setState({ todos: newTodos });
     }
 
     renderTodos = () => {
         const sortedTodos = this.filterTodos();
         return _.map(sortedTodos, (todo, id) => {
             return (
-                <TodoListItem title={todo.title} key={id} checked={todo.checked} id={todo.id} handleCheck={this.handleCheck} />
+                <TodoListItem
+                    title={todo.title}
+                    key={id}
+                    checked={todo.checked}
+                    id={todo.id}
+                    handleCheck={this.handleCheck}
+                    handleDelete={this.handleDelete}
+                    edit={todo.edit}
+                    handleDoubleClick={this.handleEdit}
+                    handleEditSubmit={this.handleEditSubmit}
+
+                />
             )
         })
     }
-
-
 
     render() {
 

@@ -1,3 +1,7 @@
+* {
+  outline: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -14,4 +18,8 @@ body {
 .todo-checkbox {
   cursor: pointer;
   
+}
+
+.todo-line-through {
+  text-decoration: line-through;
 }

@@ -16,7 +16,8 @@ export default class TodoHeader extends React.Component {
         const todo = {
             title,
             timestamp: Date.now(),
-            checked: false
+            checked: false,
+            edit: false
 
         }
         database.ref('/todos/').push(todo)
