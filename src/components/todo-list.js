@@ -41,28 +41,36 @@ export default class TodoList extends React.Component {
 
     handleEdit = (id) => {
         const { todos } = this.state;
-        const newTodos = todos.map(todo => {
+        todos.forEach(todo => {
             if (todo.id === id) {
-                return {
-                    ...todo,
-                    edit: true
-                }
-            }
-            return todo
-        })
+                database.ref('todos').child(id).update({ edit: true });
 
-        this.setState({ todos: newTodos });
+            }
+
+
+        })
     }
 
-    handleEditSubmit = (title, id) => {
+    handleEditSubmit = (e, title, id) => {
+
+
+        e.preventDefault();
+        if (title.length === 0) {
+            alert('new title can not be 0');
+            return;
+        }
+
 
         const { todos } = this.state;
-        const newTodos = todos.forEach(todo => {
+        todos.forEach(todo => {
             if (todo.id === id) {
-                database.ref('todos').child(id).update({ title });
+                database.ref('todos').child(id).update({ title, edit: false });
+
             }
 
+
         })
+
 
 
     }

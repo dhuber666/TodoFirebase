@@ -13,6 +13,14 @@ export default class TodoHeader extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const { title } = this.state;
+
+        console.log(title);
+        if (title.length === 0) {
+            alert('enter a title');
+            return;
+        }
+
+
         const todo = {
             title,
             timestamp: Date.now(),

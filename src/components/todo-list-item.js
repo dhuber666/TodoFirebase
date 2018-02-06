@@ -12,8 +12,10 @@ const TodoListItem = (props) => {
     if (!edit) {
         return (
             <Col m={12} s={12}>
-                <div onDoubleClick={() => handleDoubleClick(id)} className={'card-panel' + ' teal' + ' lighten-2' + ' yellow-text ' + checkedClass}>
-                    {props.title}
+                <div className={'card-panel' + ' teal' + ' lighten-2' + ' yellow-text ' + checkedClass}>
+                    <span onDoubleClick={() => handleDoubleClick(id)}>
+                        {props.title}
+                    </span>
                     <span onClick={() => handleCheck(id, checked)}>
 
                         <Icon className='right todo-checkbox' children={checkedString} />

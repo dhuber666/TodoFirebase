@@ -17,11 +17,11 @@ export default class TodoEdit extends React.Component {
 
     render() {
         return (
-            <div onBlur={() => this.props.handleEditSubmit(this.state.value, this.props.id)}>
+            <div onBlur={(e) => this.props.handleEditSubmit(e, this.state.value, this.props.id)}>
                 <form
-                    onSubmit={() => this.props.handleEditSubmit(this.state.value, this.props.id)}
+                    onSubmit={(e) => this.props.handleEditSubmit(e, this.state.value, this.props.id)}
                 >
-                    <input ref={'input'} value={this.state.value} autofocus='true' onChange={e => this.setState({ value: e.target.value })} />
+                    <input ref={'input'} value={this.state.value} autoFocus='true' onChange={e => this.setState({ value: e.target.value })} />
                 </form>
             </div>
         )
