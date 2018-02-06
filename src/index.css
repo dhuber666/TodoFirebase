@@ -23,3 +23,7 @@ body {
 .todo-line-through {
   text-decoration: line-through;
 }
+
+.delete-all-btn, .check-all-btn {
+ margin-left: 10px;
+}

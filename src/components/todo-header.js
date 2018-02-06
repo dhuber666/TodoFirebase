@@ -30,23 +30,35 @@ export default class TodoHeader extends React.Component {
     }
 
     render() {
+      console.log(this.props);
       return (
-
-        <div className="row">
-          <form className="col s12" onSubmit={this.handleSubmit}>
-            <div className="row">
-              <div className="input-field col s6">
-                <input id="name" type="text" value={this.state.title} className="validate" onChange={e => this.setState({ title: e.target.value })} />
-                <label htmlFor="name">Add a Todo</label>
+        <div>
+          <div className="row">
+            <form className="col s12" onSubmit={this.handleSubmit}>
+              <div className="row">
+                <div className="input-field col s6">
+                  <input id="name" type="text" value={this.state.title} className="validate" onChange={e => this.setState({ title: e.target.value })} />
+                  <label htmlFor="name">Add a Todo</label>
+                </div>
+                <div className="input-field col s6">
+                  <button className="btn waves-effect waves-light yellow-text" type="submit">Go!
+                  </button>
+                </div>
               </div>
-              <div className="input-field col s6">
-                <button className="btn waves-effect waves-light yellow-text" type="submit">Go!
-                </button>
-              </div>
+            </form>
+          </div>
+          <div className="row">
+            <div>
+              <button onClick={() => this.props.filterTodos('/')} className="col s4 btn-flat  blue-text"> All </button>
             </div>
-          </form>
+            <div>
+              <button onClick={() => this.props.filterTodos('open')} className="col s4 btn-flat  blue-text"> open </button>
+            </div>
+            <div>
+              <button onClick={() => this.props.filterTodos('done')} className="col s4 btn-flat  blue-text"> closed </button>
+            </div>
+          </div>
         </div>
-
       );
     }
 }

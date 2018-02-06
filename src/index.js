@@ -9,7 +9,11 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
+      <Route to="/done" component={TodoApp} />
+      <Route to="/open" component={TodoApp} />
       <Route to="/" component={TodoApp} />
+
+
     </Switch>
   </BrowserRouter>,
 
