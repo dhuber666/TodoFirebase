@@ -1,10 +1,11 @@
 
 import React from 'react';
+import TodoFAQ from './todo-faq';
 
 const TodoFooter = props => (
-  <div className="row">
+  <div className="todo-footer" >
 
-
+    <TodoFAQ />
     <button
       onClick={props.handleToggleAll}
       className="btn waves-effect waves-light teal right delete-all-btn"

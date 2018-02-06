@@ -27,3 +27,29 @@ body {
 .delete-all-btn, .check-all-btn {
  margin-left: 10px;
 }
+
+.aside  {
+
+  display: inline;
+  font-size: 17px;
+
+}
+
+.side-nav, .side-nav {
+  padding: 20px;
+
+}
+
+.side-nav > li {
+
+  top: 30px;
+}
+
+.side-nav li {
+  line-height: 20px !important;
+}
+
+.aside-items {
+  width: 70%;
+  margin: 0 auto;
+}
