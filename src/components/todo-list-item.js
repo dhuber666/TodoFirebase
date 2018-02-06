@@ -14,13 +14,14 @@ const TodoListItem = (props) => {
             <Col m={12} s={12}>
                 <div onDoubleClick={() => handleDoubleClick(id)} className={'card-panel' + ' teal' + ' lighten-2' + ' yellow-text ' + checkedClass}>
                     {props.title}
-                    <span onClick={() => handleDelete(id)}>
-                        <Icon className='right todo-checkbox' children='delete' />
-                    </span>
                     <span onClick={() => handleCheck(id, checked)}>
 
                         <Icon className='right todo-checkbox' children={checkedString} />
                     </span>
+                    <span onClick={() => handleDelete(id)}>
+                        <Icon className='right todo-checkbox' children='delete' />
+                    </span>
+
                 </div>
             </Col>
         )

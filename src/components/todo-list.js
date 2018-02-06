@@ -3,6 +3,8 @@ import TodoListItem from './todo-list-item';
 import _ from 'lodash';
 import database from '../firebase';
 
+import TodoFooter from './footer';
+
 
 export default class TodoList extends React.Component {
 
@@ -53,20 +55,16 @@ export default class TodoList extends React.Component {
     }
 
     handleEditSubmit = (title, id) => {
-        console.log('on blur?');
+
         const { todos } = this.state;
-        const newTodos = todos.map(todo => {
+        const newTodos = todos.forEach(todo => {
             if (todo.id === id) {
-                return {
-                    ...todo,
-                    edit: false,
-                    title
-                }
+                database.ref('todos').child(id).update({ title });
             }
-            return todo
+
         })
 
-        this.setState({ todos: newTodos });
+
     }
 
     renderTodos = () => {
@@ -89,6 +87,35 @@ export default class TodoList extends React.Component {
         })
     }
 
+    handleToggleAll = () => {
+
+        // see if there are todos that are not yet completed. Complete all. 
+        // if all completed - make it incomplete
+        // if all incompleted - make them complete (toggle all)
+
+        const { todos } = this.state;
+        let wasUpdated = false;
+        _.forEach(todos, todo => {
+            if (!todo.checked) {
+                database.ref('todos').child(todo.id).update({ checked: true });
+                wasUpdated = true;
+            }
+
+        })
+
+        if (!wasUpdated) {
+            _.forEach(todos, todo => {
+
+                database.ref('todos').child(todo.id).update({ checked: !todo.checked });
+
+
+            })
+        }
+
+
+
+    }
+
     render() {
 
         if (!this.state.todos) {
@@ -97,6 +124,7 @@ export default class TodoList extends React.Component {
         return (
             <div>
                 {this.renderTodos()}
+                <TodoFooter handleToggleAll={this.handleToggleAll} />
             </div>
         )
     }
