@@ -1,8 +1,8 @@
-###Practicing Project with Firebase & React
+### Practicing Project with Firebase & React
 
 Project can be viewed here: https://todo-d045a.firebaseapp.com/
 
-####Features:
+#### Features:
 
 * Real Time Database Sync with Firebase
 * Everything you would expect from a simple Todo App (Toggle, filter, deleting. etc...)
